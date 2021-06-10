@@ -8,10 +8,16 @@ const ColorAdjuster = ({ color, code, colorChange }) => {
       <Text>
         {color}: {code}
       </Text>
-      <TouchableOpacity style={styles.button} onPress={() => colorChange(`${color}`, 'inc')}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => colorChange({ color: `${color}`, amount: 15 })}
+      >
         <Text>More {color}</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={() => colorChange(`${color}`, 'dec')}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => colorChange({ color: `${color}`, amount: -15 })}
+      >
         <Text>Less {color}</Text>
       </TouchableOpacity>
     </View>

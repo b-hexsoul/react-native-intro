@@ -1,44 +1,24 @@
-import React, { useState } from 'react';
+import React, { useReducer } from 'react';
 import { View } from 'react-native';
 import ColorAdjuster from '../components/ColorAdjuster';
 
-const AdjustColor = () => {
-  const [color, setColor] = useState([255, 255, 255]);
+const colorReducer = (state, action) => {
+  // action object - { color: 'red' || 'green' || 'blue', amount: 15 || -15}
+  switch (action.color) {
+    case 'Red':
+      return { ...state, red: state.red + action.amount };
+    case 'Green':
+      return { ...state, green: state.green + action.amount };
+    case 'Blue':
+      return { ...state, blue: state.blue + action.amount };
+    default:
+      return state;
+  }
+};
 
-  const colorChange = (_color, type) => {
-    switch (_color) {
-      case 'Red':
-        return setColor(
-          [...color].map((color, idx) => {
-            if (type === 'inc') {
-              return idx === 0 && color <= 250 ? color + 5 : color;
-            } else {
-              return idx === 0 && color >= 5 ? color - 5 : color;
-            }
-          })
-        );
-      case 'Green':
-        return setColor(
-          [...color].map((color, idx) => {
-            if (type === 'inc') {
-              return idx === 1 && color <= 250 ? color + 5 : color;
-            } else {
-              return idx === 1 && color >= 5 ? color - 5 : color;
-            }
-          })
-        );
-      case 'Blue':
-        return setColor(
-          [...color].map((color, idx) => {
-            if (type === 'inc') {
-              return idx === 2 && color <= 250 ? color + 5 : color;
-            } else {
-              return idx === 2 && color >= 5 ? color - 5 : color;
-            }
-          })
-        );
-    }
-  };
+const AdjustColor = () => {
+  const [state, dispatch] = useReducer(colorReducer, { red: 255, green: 255, blue: 255 });
+  const { red, green, blue } = state;
 
   return (
     <View
@@ -46,12 +26,12 @@ const AdjustColor = () => {
         flex: 1,
         justifyContent: 'center',
         paddingVertical: 20,
-        backgroundColor: `rgb(${color[0]}, ${color[1]}, ${color[2]})`,
+        backgroundColor: `rgb(${red}, ${green}, ${blue})`,
       }}
     >
-      <ColorAdjuster colorChange={colorChange} code={color[0]} color={'Red'} />
-      <ColorAdjuster colorChange={colorChange} code={color[1]} color={'Green'} />
-      <ColorAdjuster colorChange={colorChange} code={color[2]} color={'Blue'} />
+      <ColorAdjuster colorChange={dispatch} code={state.red} color={'Red'} />
+      <ColorAdjuster colorChange={dispatch} code={state.green} color={'Green'} />
+      <ColorAdjuster colorChange={dispatch} code={state.blue} color={'Blue'} />
     </View>
   );
 };
