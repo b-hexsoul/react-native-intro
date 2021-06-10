@@ -3,19 +3,19 @@ import { View } from 'react-native';
 import ColorAdjuster from '../components/ColorAdjuster';
 
 const colorReducer = (state, action) => {
-  // action object - { color: 'red' || 'green' || 'blue', amount: 15 || -15}
-  switch (action.color) {
+  // action object - { type: 'red' || 'green' || 'blue', payload: 15 || -15}
+  switch (action.type) {
     case 'Red':
-      return state.red + action.amount <= 255 && state.red + action.amount >= 0
-        ? { ...state, red: state.red + action.amount }
+      return state.red + action.payload <= 255 && state.red + action.payload >= 0
+        ? { ...state, red: state.red + action.payload }
         : state;
     case 'Green':
-      return state.green + action.amount <= 255 && state.green + action.amount >= 0
-        ? { ...state, green: state.green + action.amount }
+      return state.green + action.payload <= 255 && state.green + action.payload >= 0
+        ? { ...state, green: state.green + action.payload }
         : state;
     case 'Blue':
-      return state.blue + action.amount <= 255 && state.blue + action.amount >= 0
-        ? { ...state, blue: state.blue + action.amount }
+      return state.blue + action.payload <= 255 && state.blue + action.payload >= 0
+        ? { ...state, blue: state.blue + action.payload }
         : state;
     default:
       return state;
