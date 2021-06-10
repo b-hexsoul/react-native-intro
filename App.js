@@ -6,6 +6,7 @@ import ListScreen from './src/screens/ListScreen';
 import Counter from './src/screens/Counter';
 import PictureScreen from './src/screens/PictureScreen';
 import RandomColor from './src/screens/RandomColor';
+import AdjustColor from './src/screens/AdjustColor';
 
 const navigator = createStackNavigator(
   {
@@ -15,6 +16,7 @@ const navigator = createStackNavigator(
     Counter: Counter,
     Pictures: PictureScreen,
     RandomColor: RandomColor,
+    AdjustColor: AdjustColor,
   },
   {
     initialRouteName: 'Home',
