@@ -6,11 +6,17 @@ const colorReducer = (state, action) => {
   // action object - { color: 'red' || 'green' || 'blue', amount: 15 || -15}
   switch (action.color) {
     case 'Red':
-      return { ...state, red: state.red + action.amount };
+      return state.red + action.amount <= 255 && state.red + action.amount >= 0
+        ? { ...state, red: state.red + action.amount }
+        : state;
     case 'Green':
-      return { ...state, green: state.green + action.amount };
+      return state.green + action.amount <= 255 && state.green + action.amount >= 0
+        ? { ...state, green: state.green + action.amount }
+        : state;
     case 'Blue':
-      return { ...state, blue: state.blue + action.amount };
+      return state.blue + action.amount <= 255 && state.blue + action.amount >= 0
+        ? { ...state, blue: state.blue + action.amount }
+        : state;
     default:
       return state;
   }
