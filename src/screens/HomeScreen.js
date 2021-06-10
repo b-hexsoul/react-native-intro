@@ -20,6 +20,9 @@ const HomeScreen = ({ navigation }) => {
       <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('AdjustColor')}>
         <Text>Go to Adjust Colors!</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('InputName')}>
+        <Text>Go to input name!</Text>
+      </TouchableOpacity>
     </View>
   );
 };
